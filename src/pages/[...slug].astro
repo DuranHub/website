@@ -1,0 +1,42 @@
+---
+import { useStoryblokApi } from "@storyblok/astro";
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+import Layout from "../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const sbApi = useStoryblokApi();
+
+  const { data } = await sbApi.get("cdn/stories", {
+    version: import.meta.env.DEV ? "draft" : "published",
+  });
+
+  const stories = Object.values(data.stories).filter(
+    (story) => story.full_slug !== "home"
+  );
+
+  return stories.map((story) => {
+    const slug = story.full_slug.replace(/^\/|\/$/g, "");
+    return {
+      params: { slug },
+    };
+  });
+}
+
+const storyblokApi = useStoryblokApi();
+const slug = Astro.params.slug;
+let content;
+let title;
+try {
+  const { data } = await storyblokApi.get(`cdn/stories/${slug}`, {
+    version: import.meta.env.PUBLIC_ENV === 'preview' ? "draft" : "published",
+  });
+  content = data.story.content;
+  title = data.story.name;
+} catch (error) {
+  return Astro.redirect("/404");
+}
+---
+
+<Layout title={title ? `DuranHub - ${title}` : "DuranHub"}>
+  <StoryblokComponent blok={content} />
+</Layout>
