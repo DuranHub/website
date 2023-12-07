@@ -4,11 +4,13 @@ import { loadEnv } from 'vite';
 import tailwind from "@astrojs/tailwind";
 import vercel from "@astrojs/vercel/serverless";
 const env = loadEnv("", process.cwd(), 'STORYBLOK');
+const {PUBLIC_ENV} = loadEnv("", process.cwd(), 'PUBLIC_ENV');
+const environment = process.env.PUBLIC_ENV || PUBLIC_ENV;
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [storyblok({
-    bridge: process.env.PUBLIC_ENV === 'preview' || process.env.PUBLIC_ENV === 'development',
+    bridge: environment === 'preview' || environment === 'development',
     accessToken: env.STORYBLOK_TOKEN,
     enableFallbackComponent: true,
     components: {
@@ -17,11 +19,12 @@ export default defineConfig({
       page: 'storyblok/Page',
       title: 'storyblok/Title',
       hero: 'storyblok/Hero',
+      heroImage: 'storyblok/HeroImage'
     },
     apiOptions: {
       region: 'us'
     }
   }), tailwind()],
-  output: process.env.PUBLIC_ENV === 'preview' ? 'server' : 'static',
-  adapter: process.env.PUBLIC_ENV === 'preview' ? vercel() : undefined,
+  output: environment === 'preview' ? 'server' : 'static',
+  adapter: environment === 'preview' ? vercel() : undefined,
 });
