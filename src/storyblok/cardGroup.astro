@@ -1,0 +1,49 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+
+type Variants = "primary" | "secondary";
+
+type ParagraphType = {
+    Text1: string;
+    Text2: string;
+    Text3: string;
+    component: string;
+    ButtonText: string;
+    icono: {
+        filename: string;
+    }
+};
+
+const { blok } = Astro.props as { blok: { variant: Variants; text: string; 
+    paragraph_type: ParagraphType[]; } };
+---
+
+<div
+    class="bg-cover bg-center flex flex-row justify-center gap-8 m-4 text-center"
+    {...storyblokEditable(blok)}
+>   
+    <div class="flex flex-col items-center p-4 bg-white rounded shadow w-64">
+        <img class="mb-4" src={blok.paragraph_type[0]?.icono.filename} alt={blok.paragraph_type[0]?.Text1} />
+        <p class="text-sm text-gray-600 mb-4">{blok.paragraph_type[0]?.Text1}</p> 
+        <button class="px-4 py-2 mb-4 bg-[#ff004e] text-white rounded-3xl">{blok.paragraph_type[0]?.ButtonText}</button> 
+        <p class="text-sm font-bold text-gray-800 mb-2">{blok.paragraph_type[0]?.Text2}</p> 
+        <p class="text-sm text-[#ff004e]">{blok.paragraph_type[0]?.Text3}</p>
+    </div>
+
+    <div class="flex flex-col items-center p-4 bg-white rounded shadow w-64">
+        <img class="mb-4" src={blok.paragraph_type[1]?.icono.filename} alt={blok.paragraph_type[1]?.Text1} />
+        <p class="text-sm text-gray-600 mb-4">{blok.paragraph_type[1]?.Text1}</p> 
+        <button class="px-4 py-2 mb-4 bg-[#ff004e] text-white rounded-3xl">{blok.paragraph_type[1]?.ButtonText}</button> 
+        <p class="text-sm font-bold text-gray-800 mb-2">{blok.paragraph_type[1]?.Text2}</p> 
+        <p class="text-sm text-[#ff004e]">{blok.paragraph_type[1]?.Text3}</p>
+    </div>
+
+    <div class="flex flex-col items-center p-4 bg-white rounded shadow w-64">
+        <img class="mb-4" src={blok.paragraph_type[2]?.icono.filename} alt={blok.paragraph_type[2]?.Text1} />
+        <p class="text-sm text-gray-600 mb-4">{blok.paragraph_type[2]?.Text1}</p> 
+        <button class="px-4 py-2 mb-4 bg-[#ff004e] text-white rounded-3xl">{blok.paragraph_type[2]?.ButtonText}</button> 
+        <p class="text-sm font-bold text-gray-800 mb-2">{blok.paragraph_type[2]?.Text2}</p> 
+        <p class="text-sm text-[#ff004e]">{blok.paragraph_type[2]?.Text3}</p>
+    </div> 
+</div>
+

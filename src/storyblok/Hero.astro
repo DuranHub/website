@@ -3,15 +3,18 @@ import { storyblokEditable } from "@storyblok/astro";
 
 type Variants = "primary" | "secondary";
 
-const { blok } = Astro.props as { blok: { variant: Variants; text: string } };
+const { blok } = Astro.props as { blok: { variant: Variants; text: string; Text2: string;
+  Image: string; BackgroundColor: string; ButtonText: string;} };
 ---
 
 <div
-  class="bg-cover bg-center"
+  class=`bg-cover bg-center bg-[#${blok.BackgroundColor}] relative`
   {...storyblokEditable(blok)}
-  style={`background-image: url(https://via.placeholder.com/240);`}
 >
-  <h1 class={`text-white font-bold py-4 px-4`}>
-    {blok.text}
-  </h1>
+    <div class={`absolute top-0 left-0 text-white py-4 px-4`}>
+      <h1 class="text-4xl mb-2">{blok.text}</h1>
+      <h2 class="text-2xl mb-4">{blok.Text2}</h2>
+      <button class="bg-[#ff004e] rounded-full text-white py-3 px-8 text-lg cursor-pointer">{blok.ButtonText}</button>
+    </div>
+    <img src={blok.Image} alt={blok.text} />
 </div>
