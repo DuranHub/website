@@ -1,0 +1,48 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+
+import Card from "./Card.astro";
+
+type ParagraphType = {
+    primaryText: string;
+    secondaryText: string;
+    tertiaryText: string;
+    buttonText: string;
+    icon: {
+        filename: string;
+    }
+};
+
+const { blok } = Astro.props as { blok: { paragraph_type: ParagraphType[]; } };
+---
+
+<div
+    class="bg-cover bg-center flex flex-row justify-center gap-8 m-4 text-center"
+    {...storyblokEditable(blok)}
+>   
+    <Card 
+        primaryText={blok.paragraph_type[0]?.primaryText}
+        secondaryText={blok.paragraph_type[0]?.secondaryText}
+        tertiaryText={blok.paragraph_type[0]?.tertiaryText}
+        buttonText={blok.paragraph_type[0]?.buttonText}
+        icon={blok.paragraph_type[0]?.icon}
+    />
+
+    <Card 
+        primaryText={blok.paragraph_type[1]?.primaryText}
+        secondaryText={blok.paragraph_type[1]?.secondaryText}
+        tertiaryText={blok.paragraph_type[1]?.tertiaryText}
+        buttonText={blok.paragraph_type[1]?.buttonText}
+        icon={blok.paragraph_type[1]?.icon}
+    />
+
+    <Card 
+        primaryText={blok.paragraph_type[2]?.primaryText}
+        secondaryText={blok.paragraph_type[2]?.secondaryText}
+        tertiaryText={blok.paragraph_type[2]?.tertiaryText}
+        buttonText={blok.paragraph_type[2]?.buttonText}
+        icon={blok.paragraph_type[2]?.icon}
+    />
+
+</div>
+
