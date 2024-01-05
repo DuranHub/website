@@ -8,13 +8,13 @@ const { blok } = Astro.props as { blok: { variant: Variants; text: string; Text2
 ---
 
 <div
-  class=`bg-cover bg-center bg-[#${blok.BackgroundColor}] relative`
+  class=`bg-cover bg-center bg-[#63a9dd] relative`
   {...storyblokEditable(blok)}
 >
     <div class={`absolute top-0 left-0 text-white py-4 px-4`}>
       <h1 class="text-4xl mb-2">{blok.text}</h1>
       <h2 class="text-2xl mb-4">{blok.Text2}</h2>
-      <button class="bg-[#ff004e] rounded-full text-white py-3 px-8 text-lg cursor-pointer">{blok.ButtonText}</button>
+      <button class="bg-primary rounded-full text-white py-3 px-8 text-lg cursor-pointer">{blok.ButtonText}</button>
     </div>
     <img src={blok.Image} alt={blok.text} />
 </div>

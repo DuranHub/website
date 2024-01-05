@@ -20,7 +20,8 @@ export default defineConfig({
       title: 'storyblok/Title',
       hero: 'storyblok/Hero',
       heroImage: 'storyblok/HeroImage',
-      cardGroup: 'storyblok/cardGroup'
+      cardGroup: 'storyblok/cardGroup',
+      card: 'storyblok/card',
     },
     apiOptions: {
       region: 'us'

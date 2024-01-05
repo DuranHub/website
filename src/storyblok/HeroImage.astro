@@ -3,16 +3,15 @@ import { storyblokEditable } from "@storyblok/astro";
 
 type Variants = "primary" | "secondary";
 
-const { blok } = Astro.props as { blok: { variant: Variants; text: string } };
+const { blok } = Astro.props as { blok: { variant: Variants;
+  image: string; primaryText: string; secondaryText: string; } };
 ---
-
-<div
-  class="bg-cover bg-center"
-  {...storyblokEditable(blok)}
-  style={`background-image: url(https://via.placeholder.com/240);`}
->
-  <h1 class={`text-white font-bold py-4 px-4`}>
-    {blok.text}
-  </h1>
+<div class="flex justify-between bg-accent items-center p-4" {...storyblokEditable(blok)}>
+  <div class="w-1/2">
+    <h1 class="text-xl font-bold mb-2 text-primary">{blok.primaryText}</h1>
+    <p class="text-white">{blok.secondaryText}</p>
+  </div>
+  <div class="w-1/2">
+    <img src={blok.image} alt={blok.primaryText}>
+  </div>
 </div>
-
